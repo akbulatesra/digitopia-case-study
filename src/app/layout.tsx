@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import ProviderComponent from '@/components/Provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-home_page font-bitter">{children}</body>
+      <body className="antialiased bg-home_page font-bitter">
+        <ProviderComponent>{children}</ProviderComponent>
+      </body>
     </html>
   );
 }
