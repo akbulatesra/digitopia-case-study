@@ -5,6 +5,7 @@ import { object, string } from 'yup';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
+import { useLoginMutation } from '@/services';
 
 const loginFormSchema = object({
   username: string().required('Username is required'),
@@ -24,8 +25,12 @@ const Form = () => {
   } = useForm<Inputs>({
     resolver: yupResolver(loginFormSchema),
   });
+  const [login, result] = useLoginMutation();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    login({ username: data.username, password: data.password });
+    console.log(result);
+  };
 
   return (
     <Box
