@@ -3,5 +3,13 @@ export interface SignInRequestModel {
   password: string;
 }
 export interface SignInResponseModel {
-  idToken: string;
+  accessToken: {
+    jwtToken: string;
+  };
+  idToken: {
+    jwtToken: string;
+  };
+  refreshToken: {
+    token: string;
+  };
 }

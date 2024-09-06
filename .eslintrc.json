@@ -22,7 +22,7 @@
   "rules": {
     "prettier/prettier": [
       "error",
-      { "endOfLine": "auto", "singleQuote": true }
+      { "endOfLine": "auto", "singleQuote": true, "trailingComma": "es5" }
     ],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
