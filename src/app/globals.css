@@ -19,6 +19,14 @@ body {
   background: var(--background);
 }
 
+a {
+  all: unset;
+  display: inline;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
