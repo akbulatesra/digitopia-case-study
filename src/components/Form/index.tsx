@@ -4,8 +4,9 @@ import Box from '@mui/material/Box';
 import { object, string } from 'yup';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { useLoginMutation } from '@/services';
+import { LoginFormTextField } from '../styledComponents/LoginFormTextField';
 
 const loginFormSchema = object({
   username: string().required('Username is required'),
@@ -28,7 +29,7 @@ const Form = () => {
   const [login, result] = useLoginMutation();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    login({ username: data.username, password: data.password });
+    login({ email: data.username, password: data.password });
     console.log(result);
   };
 
@@ -39,14 +40,14 @@ const Form = () => {
       sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <TextField
+      <LoginFormTextField
         label="Username"
         variant="standard"
         {...register('username')}
         error={!!errors.username}
         helperText={errors.username?.message}
       />
-      <TextField
+      <LoginFormTextField
         label="Password"
         variant="standard"
         type="password"

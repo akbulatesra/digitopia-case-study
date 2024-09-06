@@ -9,7 +9,7 @@ export const personalApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<SignInResponseModel, SignInRequestModel>({
       query: (credentials) => ({
-        url: 'https://dev.digitopia.co/api/a2',
+        url: 'https://dev.digitopia.co/api/a2/signIn',
         method: 'POST',
         body: credentials,
       }),
