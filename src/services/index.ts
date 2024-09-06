@@ -4,12 +4,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const personalApi = createApi({
   reducerPath: 'personalApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '',
+    baseUrl: '/api',
   }),
   endpoints: (builder) => ({
     login: builder.mutation<SignInResponseModel, SignInRequestModel>({
       query: (credentials) => ({
-        url: 'https://dev.digitopia.co/api/a2/signIn',
+        url: 'signIn',
         method: 'POST',
         body: credentials,
       }),

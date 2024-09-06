@@ -1,14 +1,16 @@
+import { Box, Typography } from '@mui/material';
 import Form from '@/components/Form';
+import BlurContainer from '@/components/BlurContainer';
 
 export default function Home() {
   return (
-    <main className="w-full flex justify-end items-center align-middle h-screen">
-      <div className="bg-white text-black p-8 rounded-lg max-w-md w-full mx-auto">
-        <h1 className="text-3xl font-bold font-bitter text-center mb-4">
+    <BlurContainer maxWidth="sm">
+      <Box paddingX={10} paddingY={3}>
+        <Typography variant="h3" component="h1" align="center" mb={4}>
           Welcome
-        </h1>
+        </Typography>
         <Form />
-      </div>
-    </main>
+      </Box>
+    </BlurContainer>
   );
 }
