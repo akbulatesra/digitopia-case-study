@@ -7,6 +7,7 @@ interface LoginFormTextFieldProps {
   label: string;
   type?: string;
   slotProps?: any;
+  registerLabel: string;
 }
 
 const StyledLoginFormTextField = styled(TextField)({
@@ -47,6 +48,7 @@ const StyledLoginFormTextField = styled(TextField)({
 const LoginFormTextField = ({
   error,
   label,
+  registerLabel,
   type = 'text',
   slotProps,
   register,
@@ -58,7 +60,7 @@ const LoginFormTextField = ({
       error={!!error}
       type={type}
       margin="dense"
-      {...register(label)}
+      {...register(registerLabel)}
       slotProps={slotProps}
       helperText={
         <span

@@ -1,0 +1,12 @@
+{
+  "page": {
+    "welcome": "Hoşgeldiniz",
+    "username": "Kullanıcı Adı",
+    "password": "Şifre",
+    "login": "Giriş Yap"
+  },
+  "not-found": {
+    "notFound": "Sayfa Bulunamadı",
+    "returnHome": "Anasayfaya Dön"
+  }
+}
