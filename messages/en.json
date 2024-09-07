@@ -8,5 +8,9 @@
   "not-found": {
     "notFound": "Page Not Found",
     "returnHome": "Return Home"
+  },
+  "languages": {
+    "english": "English",
+    "turkish": "Turkish"
   }
 }

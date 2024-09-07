@@ -8,5 +8,9 @@
   "not-found": {
     "notFound": "Sayfa Bulunamadı",
     "returnHome": "Anasayfaya Dön"
+  },
+  "languages": {
+    "english": "İngilizce",
+    "turkish": "Türkçe"
   }
 }
