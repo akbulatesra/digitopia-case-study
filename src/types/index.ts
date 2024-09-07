@@ -13,3 +13,4 @@ export interface SignInResponseModel {
     token: string;
   };
 }
+export type Locale = 'tr' | 'en';

@@ -5,6 +5,7 @@ import { Bitter } from 'next/font/google';
 import ProviderComponent from '../../components/Provider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 
 const bitter = Bitter({ subsets: ['latin'] });
 
@@ -12,6 +13,10 @@ export const metadata: Metadata = {
   title: 'Digitopia Case Study',
   description: 'Digitopia Case Study by Esra Akbulat | 2024',
 };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function RootLayout({
   children,
