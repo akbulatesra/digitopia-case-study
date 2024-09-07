@@ -1,34 +1,13 @@
-import BlurContainer from '@/components/BlurContainer';
-import { Box, Button, Typography } from '@mui/material';
-import Image from 'next/image';
-import Link from 'next/link';
+'use client';
 
-const errorImage =
-  'https://esrasbucket.s3.eu-north-1.amazonaws.com/ghost+(1).png';
+import Error from 'next/error';
 
-const NotFound = () => {
+export default function NotFound() {
   return (
-    <BlurContainer>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        gap={4}
-        py={4}
-      >
-        <Image src={errorImage} width={200} height={200} alt="ghost" />
-        <Typography fontSize={40} color="black" fontWeight="bold">
-          Page Not Found
-        </Typography>
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: 'black', marginTop: 6 }}
-        >
-          <Link href={'/home'}>Return Home</Link>
-        </Button>
-      </Box>
-    </BlurContainer>
+    <html lang="en">
+      <body>
+        <Error statusCode={404} />
+      </body>
+    </html>
   );
-};
-export default NotFound;
+}

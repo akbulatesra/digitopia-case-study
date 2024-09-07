@@ -1,0 +1,12 @@
+{
+  "page": {
+    "welcome": "Welcome",
+    "username": "Username",
+    "password": "Password",
+    "login": "Sign In"
+  },
+  "not-found": {
+    "notFound": "Page Not Found",
+    "returnHome": "Return Home"
+  }
+}

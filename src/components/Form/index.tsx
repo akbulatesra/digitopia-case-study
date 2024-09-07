@@ -11,9 +11,10 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoginFormTextField from '../LoginFormTextField';
 import useErrorListener from '@/hooks/useErrorListener';
 import ErrorAlert from '../Error';
-import { useAppDispatch } from '@/app/redux/hook';
-import { setUser } from '@/app/redux/slices/userSlice';
+import { useAppDispatch } from '@/redux/hook';
+import { setUser } from '@/redux/slices/userSlice';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const loginFormSchema = object({
   username: string().required('Username is required'),
@@ -30,6 +31,7 @@ const Form = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const t = useTranslations('page');
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -84,12 +86,14 @@ const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <LoginFormTextField
-          label="username"
+          label={t('username')}
+          registerLabel="username"
           register={register}
           error={errors.username}
         />
         <LoginFormTextField
-          label="password"
+          label={t('password')}
+          registerLabel="password"
           type={showPassword ? 'text' : 'password'}
           register={register}
           error={errors.password}
@@ -121,7 +125,7 @@ const Form = () => {
           sx={{ backgroundColor: 'black', marginTop: 6 }}
           disabled={!!isLoading}
         >
-          Login
+          {t('login')}
         </Button>
       </Box>
     </>
