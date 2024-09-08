@@ -8,6 +8,13 @@ export interface SignInResponseModel {
   };
   idToken: {
     jwtToken: string;
+    payload: {
+      'custom:organizationId': string;
+      'custom:organizationRole': string;
+      'custom:role': string;
+      family_name: string;
+      name: string;
+    };
   };
   refreshToken: {
     token: string;

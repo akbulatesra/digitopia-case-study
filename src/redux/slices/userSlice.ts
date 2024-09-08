@@ -1,16 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-  id?: string | null;
-  name?: string | null;
-  idToken?: string | null;
-  accessToken?: string | null;
-  refreshToken?: string | null;
+  organizationId: string | null;
+  organizationRole: string | null;
+  name: string | null;
+  familyName: string | null;
+  role: string | null;
+  idToken: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
 const initialState: UserState = {
-  id: null,
+  organizationId: null,
+  organizationRole: null,
   name: null,
+  familyName: null,
+  role: null,
   idToken: null,
   accessToken: null,
   refreshToken: null,
@@ -24,7 +30,7 @@ const userSlice = createSlice({
       return { ...state, ...action.payload };
     },
     clearUser(state) {
-      state.id = null;
+      state.organizationId = null;
       state.name = null;
       state.idToken = null;
       state.accessToken = null;

@@ -68,6 +68,11 @@ const Form = () => {
         idToken: response.idToken.jwtToken,
         accessToken: response.accessToken.jwtToken,
         refreshToken: response.refreshToken.token,
+        organizationId: response.idToken.payload['custom:organizationId'],
+        organizationRole: response.idToken.payload['custom:organizationRole'],
+        role: response.idToken.payload['custom:role'],
+        familyName: response.idToken.payload.family_name,
+        name: response.idToken.payload.name,
       })
     );
     router.push('/home');

@@ -12,5 +12,9 @@
   "languages": {
     "english": "İngilizce",
     "turkish": "Türkçe"
+  },
+  "home": {
+    "hello": "Merhaba {name}!",
+    "viewCharts": "Tabloları Görüntüle"
   }
 }

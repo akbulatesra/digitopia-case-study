@@ -12,5 +12,9 @@
   "languages": {
     "english": "English",
     "turkish": "Turkish"
+  },
+  "home": {
+    "hello": "Hello {name}!",
+    "viewCharts": "View Charts"
   }
 }
