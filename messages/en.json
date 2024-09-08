@@ -16,5 +16,9 @@
   "home": {
     "hello": "Hello {name}!",
     "viewCharts": "View Charts"
+  },
+  "navbar": {
+    "viewCharts": "Charts",
+    "home": "Home"
   }
 }

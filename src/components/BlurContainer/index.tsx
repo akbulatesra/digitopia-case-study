@@ -26,6 +26,7 @@ const BlurContainer = ({
           maxWidth="lg"
           sx={{
             padding: 10,
+            paddingTop: 14,
           }}
         >
           {children}

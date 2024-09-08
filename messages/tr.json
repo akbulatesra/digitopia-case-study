@@ -16,5 +16,9 @@
   "home": {
     "hello": "Merhaba {name}!",
     "viewCharts": "Tabloları Görüntüle"
+  },
+  "navbar": {
+    "viewCharts": "Tablolar",
+    "home": "Anasayfa"
   }
 }

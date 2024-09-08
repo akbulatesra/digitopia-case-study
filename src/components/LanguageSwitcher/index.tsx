@@ -40,10 +40,8 @@ const LanguageSwitcher = ({ sx }: LanguageSwitcherProps) => {
       size="small"
       sx={{
         ...sx,
-        backgroundColor: 'rgba(203, 213, 224, 0.3)',
-        backdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(225, 237, 251, 0.3)',
         borderRadius: 4,
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
         color: 'inherit',
       }}
     >
