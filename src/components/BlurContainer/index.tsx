@@ -1,12 +1,37 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { ReactNode } from 'react';
 
 interface BlurContainerProps {
   children: ReactNode;
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  isAuth: boolean;
 }
 
-const BlurContainer = ({ children, maxWidth = 'md' }: BlurContainerProps) => {
+const BlurContainer = ({
+  children,
+  maxWidth = 'md',
+  isAuth,
+}: BlurContainerProps) => {
+  if (isAuth)
+    return (
+      <Box
+        display="flex"
+        width="100%"
+        sx={{
+          backgroundColor: 'rgba(148, 163, 184, 0.3)',
+          backdropFilter: 'blur(10px)',
+        }}
+      >
+        <Container
+          maxWidth="lg"
+          sx={{
+            padding: 10,
+          }}
+        >
+          {children}
+        </Container>
+      </Box>
+    );
   return (
     <Container
       maxWidth={maxWidth}
@@ -19,6 +44,7 @@ const BlurContainer = ({ children, maxWidth = 'md' }: BlurContainerProps) => {
         borderRadius: 4,
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
         padding: 4,
+        minHeight: '50vh',
       }}
     >
       {children}
