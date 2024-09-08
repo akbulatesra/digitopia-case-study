@@ -6,6 +6,7 @@ import ProviderComponent from '../../components/Provider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
+import Navbar from '@/components/Navbar';
 
 const bitter = Bitter({ subsets: ['latin'] });
 
@@ -43,6 +44,7 @@ export default async function RootLayout({
               WebkitFontSmoothing: 'antialiased',
             }}
           >
+            <Navbar />
             {children}
           </Box>
         </NextIntlClientProvider>
