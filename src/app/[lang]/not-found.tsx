@@ -13,7 +13,7 @@ const NotFound = () => {
 
   return (
     <NonAuthLanguageContainer>
-      <BlurContainer>
+      <BlurContainer isAuth={false}>
         <Box
           display="flex"
           flexDirection="column"
