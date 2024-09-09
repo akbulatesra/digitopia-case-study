@@ -36,8 +36,8 @@ export default async function RootLayout({
           <Box
             component="body"
             margin={0}
-            minHeight={'100vh'}
             display="flex"
+            height={'100vh'}
             sx={{
               backgroundImage:
                 'url("https://esrasbucket.s3.eu-north-1.amazonaws.com/pexels-francesco-ungaro-2554092.jpg")',

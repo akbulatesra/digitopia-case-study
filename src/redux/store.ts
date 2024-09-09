@@ -1,7 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import rightPanelReducer from './slices/rightPanelSlice';
 import userReducer from './slices/userSlice';
 import { personalApi } from '../services';
 import industryReducer from './slices/industrySlice';
@@ -11,7 +10,6 @@ const rootReducer = combineReducers({
   user: userReducer,
   industry: industryReducer,
   country: countryReducer,
-  rightPanel: rightPanelReducer,
   [personalApi.reducerPath]: personalApi.reducer,
 });
 

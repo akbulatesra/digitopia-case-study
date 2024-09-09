@@ -54,6 +54,38 @@ export interface CountryListResponseModel {
     parent: null;
   };
 }
+interface TopicRecommendation {
+  capex: boolean;
+  condition: string | null;
+  description: string;
+  dimension: string;
+  dimensionId: string | null;
+  displayOrder: number;
+  id: string;
+  importance: number | null;
+  initiativeSize: string;
+  opex: boolean;
+  product: string;
+  recommendation: string;
+  recommendationType: string;
+  section: string;
+  topic: string;
+  urgency: number | null;
+}
+export interface ImpactRunDetailResponseModel {
+  deleted: boolean;
+  dimensionId: string;
+  id: string;
+  impactRunId: string;
+  importance: number;
+  index: number;
+  scoreGap: number;
+  sessionGap: number;
+  topicBenchmark: number;
+  topicRecommendation: TopicRecommendation;
+  topicScore: number;
+  urgency: number;
+}
 export type Locale = 'tr' | 'en';
 
 export interface WeekLine {

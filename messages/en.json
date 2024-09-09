@@ -1,7 +1,7 @@
 {
   "page": {
     "welcome": "Welcome",
-    "username": "Username",
+    "email": "Email",
     "password": "Password",
     "login": "Sign In"
   },
@@ -20,5 +20,14 @@
   "navbar": {
     "viewCharts": "Charts",
     "home": "Home"
+  },
+  "recommendationDetail": {
+    "recommendationDetail": "Recommendation Detail",
+    "size": "Size",
+    "duration": "Duration",
+    "add": "Add"
+  },
+  "profileInfo": {
+    "organizationInfo": "Organization Info"
   }
 }

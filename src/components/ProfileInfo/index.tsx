@@ -16,16 +16,24 @@ import {
   ListItemText,
   ListItem,
   ListItemIcon,
+  Divider,
+  styled,
 } from '@mui/material';
 import { useEffect, useMemo } from 'react';
 import { setCountries } from '@/redux/slices/countrySlice';
 import { setIndustries } from '@/redux/slices/industrySlice';
+import { useTranslations } from 'next-intl';
+
+const StyledIcon = styled(ListItemIcon)({
+  minWidth: 40,
+});
 
 const ProfileInfo = () => {
   const { organizationId, name, familyName } = useAppSelector(
     (state) => state.user
   );
   const dispatch = useAppDispatch();
+  const t = useTranslations('profileInfo');
   const { error, data: IndustryListData } = useGetIndustryListQuery();
   const { data: CountryListData } = useGetCountryListQuery();
   const [trigger, { data }] = useLazyGetOrganizationDetailQuery();
@@ -49,29 +57,45 @@ const ProfileInfo = () => {
   useErrorListener(error);
   return (
     <Box p={2}>
-      <Avatar />
-      <Typography>{`${name} ${familyName}`}</Typography>
-      <Typography>{`Organization Info`}</Typography>
-      <List>
-        <ListItem disableGutters disablePadding>
-          <ListItemIcon>
-            <BadgeIcon />
-          </ListItemIcon>
-          <ListItemText>{data?.name}</ListItemText>
-        </ListItem>
-        <ListItem disableGutters disablePadding>
-          <ListItemIcon>
-            <FactoryIcon />
-          </ListItemIcon>
-          <ListItemText>{filteredIndustry?.name}</ListItemText>
-        </ListItem>
-        <ListItem disableGutters disablePadding>
-          <ListItemIcon>
-            <PublicIcon />
-          </ListItemIcon>
-          <ListItemText>{filteredCountry?.name}</ListItemText>
-        </ListItem>
-      </List>
+      <Avatar
+        sx={{ width: 50, height: 50, marginX: 'auto', marginBottom: 1 }}
+      />
+      <Typography
+        textAlign="center"
+        fontSize={24}
+      >{`${name} ${familyName}`}</Typography>
+      <Box
+        sx={{ backgroundColor: 'rgba(0, 0, 0, 0.08)' }}
+        paddingX={2}
+        paddingY={1}
+        marginTop={2}
+        borderRadius={4}
+      >
+        <Typography mb={0.5} fontSize={20}>
+          {t('organizationInfo')}
+        </Typography>
+        <Divider />
+        <List>
+          <ListItem disablePadding>
+            <StyledIcon>
+              <BadgeIcon color="secondary" />
+            </StyledIcon>
+            <ListItemText>{data?.name}</ListItemText>
+          </ListItem>
+          <ListItem disablePadding>
+            <StyledIcon>
+              <FactoryIcon />
+            </StyledIcon>
+            <ListItemText>{filteredIndustry?.name}</ListItemText>
+          </ListItem>
+          <ListItem disablePadding>
+            <StyledIcon>
+              <PublicIcon color="primary" />
+            </StyledIcon>
+            <ListItemText>{filteredCountry?.name}</ListItemText>
+          </ListItem>
+        </List>
+      </Box>
     </Box>
   );
 };

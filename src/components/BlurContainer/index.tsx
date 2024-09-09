@@ -15,6 +15,7 @@ const BlurContainer = ({ children }: BlurContainerProps) => {
       <Box
         display="flex"
         width="100%"
+        overflow="auto"
         sx={{
           backgroundColor: 'rgba(148, 163, 184, 0.3)',
           backdropFilter: 'blur(10px)',
@@ -44,6 +45,7 @@ const BlurContainer = ({ children }: BlurContainerProps) => {
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
         padding: 4,
         minHeight: '50vh',
+        overflow: 'auto',
       }}
     >
       {children}

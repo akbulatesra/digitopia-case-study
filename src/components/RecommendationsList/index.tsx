@@ -16,9 +16,12 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { ImpactRunDetailResponseModel } from '@/types';
+import RightSidePanel from '../RightSideBar';
+import RecommendationDetail from '../RecommendationDetail';
 
 const drawerWidth = 240;
-const drawerHeight = 460;
+const drawerHeight = 500;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -37,9 +40,10 @@ const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: 'hidden',
   top: 'auto',
   bottom: 'auto',
-  right: 'auto',
+  right: 0,
   left: 'auto',
   height: drawerHeight,
+  position: 'absolute',
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -54,9 +58,10 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
   top: 'auto',
   bottom: 'auto',
-  right: 'auto',
+  right: 0,
   left: 'auto',
   height: drawerHeight,
+  position: 'absolute',
 });
 
 const Drawer = styled(MuiDrawer, {
@@ -87,6 +92,10 @@ const Drawer = styled(MuiDrawer, {
 
 const RecommendationsList = () => {
   const [open, setOpen] = useState(false);
+  const [openbyList, setOpenbyList] = useState(false);
+
+  const [selectedRecommendation, setSelectedRecommedation] =
+    useState<ImpactRunDetailResponseModel | null>(null);
   const { error, data: ImpactRunListData } = useGetImpactRunListQuery();
   const [trigger, { data: RecommendationsData }] =
     useLazyGetImpactRunDetailQuery(ImpactRunListData?.[0]?.id);
@@ -94,7 +103,15 @@ const RecommendationsList = () => {
   const handleDrawerClose = () => {
     setOpen(!open);
   };
-
+  const handleRightPanel = (
+    recommendation: ImpactRunDetailResponseModel | null
+  ) => {
+    setOpenbyList(true);
+    setSelectedRecommedation(recommendation);
+  };
+  const closeRightPanel = () => {
+    setOpenbyList(false);
+  };
   useEffect(() => {
     if (ImpactRunListData?.[0]?.id) {
       trigger(ImpactRunListData[0].id);
@@ -104,11 +121,27 @@ const RecommendationsList = () => {
   useErrorListener(error);
 
   return (
-    <Box display="flex" width="280px" position="relative" height={drawerHeight}>
-      <Drawer variant="permanent" open={open} anchor="right">
+    <Box
+      display="flex"
+      width={drawerWidth}
+      position="relative"
+      height={drawerHeight}
+    >
+      {selectedRecommendation && (
+        <RightSidePanel
+          children={
+            <RecommendationDetail
+              selectedRecommendation={selectedRecommendation}
+            />
+          }
+          isOpen={openbyList}
+          onClose={closeRightPanel}
+        />
+      )}
+      <Drawer variant="permanent" open={open} anchor="left">
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -116,6 +149,7 @@ const RecommendationsList = () => {
           {RecommendationsData?.map((recommendation, index) => (
             <ListItem key={index} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
+                onClick={() => handleRightPanel(recommendation)}
                 sx={[
                   {
                     minHeight: 48,
@@ -132,15 +166,6 @@ const RecommendationsList = () => {
               >
                 <ListItemText
                   primary={recommendation.topicRecommendation.recommendation}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
                 />
               </ListItemButton>
             </ListItem>
