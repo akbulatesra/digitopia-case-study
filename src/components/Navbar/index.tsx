@@ -2,12 +2,17 @@
 import { Avatar, Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import LanguageSwitcher from '../LanguageSwitcher';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { useTranslations } from 'next-intl';
+import RightSidePanel from '../RightSideBar';
+import ProfileInfo from '../ProfileInfo';
+import { setRightPanel } from '@/redux/slices/rightPanelSlice';
 
 const Navbar = () => {
   const { idToken, name } = useAppSelector((state) => state.user);
   const t = useTranslations('navbar');
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.rightPanel.open);
 
   return (
     <Box
@@ -24,6 +29,7 @@ const Navbar = () => {
           'url("https://esrasbucket.s3.eu-north-1.amazonaws.com/pexels-francesco-ungaro-2554092.jpg")',
       }}
     >
+      {isOpen && <RightSidePanel children={<ProfileInfo />} />}
       <Image
         src="/icons/digitopiaLogoWithName.svg"
         width={100}
@@ -83,7 +89,15 @@ const Navbar = () => {
         )}
 
         {idToken && (
-          <Button size="small" sx={{ minWidth: 0 }}>
+          <Button
+            size="small"
+            sx={{ minWidth: 0 }}
+            onClick={() => {
+              dispatch(setRightPanel(true));
+
+              console.log('girdi');
+            }}
+          >
             <Image alt="menu" width={30} height={30} src="/icons/menu.svg" />
           </Button>
         )}

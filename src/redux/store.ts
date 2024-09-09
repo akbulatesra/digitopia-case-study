@@ -1,15 +1,17 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import languageReducer from './slices/languageSlice';
-import themeReducer from './slices/themeSlice';
+import rightPanelReducer from './slices/rightPanelSlice';
 import userReducer from './slices/userSlice';
 import { personalApi } from '../services';
+import industryReducer from './slices/industrySlice';
+import countryReducer from './slices/countrySlice';
 
 const rootReducer = combineReducers({
-  language: languageReducer,
-  theme: themeReducer,
   user: userReducer,
+  industry: industryReducer,
+  country: countryReducer,
+  rightPanel: rightPanelReducer,
   [personalApi.reducerPath]: personalApi.reducer,
 });
 
