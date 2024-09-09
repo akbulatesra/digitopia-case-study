@@ -1,18 +1,16 @@
+'use client';
+import { useAppSelector } from '@/redux/hook';
 import { Box, Container } from '@mui/material';
 import { ReactNode } from 'react';
 
 interface BlurContainerProps {
   children: ReactNode;
-  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  isAuth: boolean;
 }
 
-const BlurContainer = ({
-  children,
-  maxWidth = 'md',
-  isAuth,
-}: BlurContainerProps) => {
-  if (isAuth)
+const BlurContainer = ({ children }: BlurContainerProps) => {
+  const { idToken } = useAppSelector((state) => state.user);
+
+  if (idToken)
     return (
       <Box
         display="flex"
@@ -23,7 +21,7 @@ const BlurContainer = ({
         }}
       >
         <Container
-          maxWidth="lg"
+          maxWidth="xl"
           sx={{
             padding: 10,
             paddingTop: 14,
@@ -35,7 +33,7 @@ const BlurContainer = ({
     );
   return (
     <Container
-      maxWidth={maxWidth}
+      maxWidth="sm"
       fixed
       sx={{
         margin: 'auto',

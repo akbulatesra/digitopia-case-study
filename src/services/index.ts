@@ -5,6 +5,14 @@ export const personalApi = createApi({
   reducerPath: 'personalApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/api',
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      headers.set('Content-Type', 'application/json');
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     login: builder.mutation<SignInResponseModel, SignInRequestModel>({
@@ -15,24 +23,19 @@ export const personalApi = createApi({
       }),
     }),
     getIndustryList: builder.query<string, void>({
-      query: () =>
-        'http://ec2-3-123-161-240.eu-central-1.compute.amazonaws.com:8080/industries',
+      query: () => '/industries',
     }),
     getCountryList: builder.query<string, void>({
-      query: () =>
-        'http://ec2-3-123-161-240.eu-central-1.compute.amazonaws.com:8080/countries',
+      query: () => '/countries',
     }),
     getOrganizationDetail: builder.query<string, void>({
-      query: (ORGANIZATION_ID) =>
-        `http://ec2-3-123-161-240.eu-central-1.compute.amazonaws.com:8181/organization/${ORGANIZATION_ID}/detail`,
+      query: (ORGANIZATION_ID) => `/organization/${ORGANIZATION_ID}/detail`,
     }),
-    getImpactRunList: builder.query<string, void>({
-      query: () =>
-        'http://ec2-3-123-161-240.eu-central-1.compute.amazonaws.com:8484/impact-runs',
+    getImpactRunList: builder.query<Record<string, any>[], void>({
+      query: () => '/impact-runs',
     }),
-    getImpactRunDetail: builder.query<string, void>({
-      query: (IMPACT_RUN_ID) =>
-        `http://ec2-3-123-161-240.eu-central-1.compute.amazonaws.com:8283/impact-run/${IMPACT_RUN_ID}/recommendations`,
+    getImpactRunDetail: builder.query<Record<string, any>[], void>({
+      query: (IMPACT_RUN_ID) => `/impact-run/${IMPACT_RUN_ID}/recommendations`,
     }),
   }),
 });
