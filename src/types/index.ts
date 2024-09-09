@@ -21,3 +21,14 @@ export interface SignInResponseModel {
   };
 }
 export type Locale = 'tr' | 'en';
+
+export interface WeekLine {
+  selectAll: string;
+  svg: d3.Selection<SVGGElement, unknown, null, undefined>;
+  data: string[];
+  y1?: number;
+  y2: number;
+  x1: (d: string) => number;
+  x2: (d: string) => number;
+  lineAttr?: Record<string, any>;
+}

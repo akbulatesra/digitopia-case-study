@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import Navbar from '@/components/Navbar';
+import BlurContainer from '@/components/BlurContainer';
 
 const bitter = Bitter({ subsets: ['latin'] });
 
@@ -45,7 +46,7 @@ export default async function RootLayout({
             }}
           >
             <Navbar />
-            {children}
+            <BlurContainer> {children}</BlurContainer>
           </Box>
         </NextIntlClientProvider>
       </ProviderComponent>
