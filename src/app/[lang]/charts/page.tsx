@@ -4,7 +4,13 @@ import { Box } from '@mui/material';
 
 const Charts = () => {
   return (
-    <Box display="flex">
+    <Box
+      display="flex"
+      sx={{ background: 'red' }}
+      width="fit-content"
+      margin="auto"
+      gap={2}
+    >
       <RecommendationsList />
       <GanttChart />
     </Box>

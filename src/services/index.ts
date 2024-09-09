@@ -1,5 +1,6 @@
 import {
   CountryListResponseModel,
+  ImpactRunDetailResponseModel,
   IndustryListResponseModel,
   OrganizationDetailRequestModel,
   OrganizationDetailResponseModel,
@@ -44,7 +45,7 @@ export const personalApi = createApi({
     getImpactRunList: builder.query<Record<string, any>[], void>({
       query: () => '/impact-runs',
     }),
-    getImpactRunDetail: builder.query<Record<string, any>[], void>({
+    getImpactRunDetail: builder.query<ImpactRunDetailResponseModel[], void>({
       query: (IMPACT_RUN_ID) => `/impact-run/${IMPACT_RUN_ID}/recommendations`,
     }),
   }),

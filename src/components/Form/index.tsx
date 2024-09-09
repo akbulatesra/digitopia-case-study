@@ -17,12 +17,12 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 const loginFormSchema = object({
-  username: string().required('Username is required'),
+  email: string().email('email gir').required('Email is required'), //DÜZELT
   password: string().required('Password is required'),
 });
 
 type Inputs = {
-  username: string;
+  email: string;
   password: string;
 };
 
@@ -56,7 +56,7 @@ const Form = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const response = await login({
-      email: data.username,
+      email: data.email,
       password: data.password,
     }).unwrap();
     localStorage.setItem('accessToken', response.accessToken.jwtToken);
@@ -91,10 +91,10 @@ const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <LoginFormTextField
-          label={t('username')}
-          registerLabel="username"
+          label={t('email')}
+          registerLabel="email"
           register={register}
-          error={errors.username}
+          error={errors.email}
         />
         <LoginFormTextField
           label={t('password')}

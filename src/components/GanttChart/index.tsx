@@ -19,7 +19,7 @@ const GanttChart: React.FC = () => {
     if (svgRef.current === null) return;
 
     // SVG boyutları
-    const margin = { top: 40, right: 0, bottom: 40, left: 0 };
+    const margin = { top: 40, right: 0, bottom: 0, left: 0 };
     const width = 960 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
@@ -170,15 +170,7 @@ const GanttChart: React.FC = () => {
       .enter()
       .append('text')
       .attr('class', 'bar-text')
-      .attr('x', (d) => {
-        console.log(
-          'esra',
-          xMonth(d.startMonth) ? (xMonth(d.startMonth) as number) + 100 : 't'
-        );
-
-        return (xMonth(d.startMonth) as number) + 50 ?? 0;
-      })
-
+      .attr('x', (d) => (xMonth(d.startMonth) as number) + 50 ?? 0)
       .attr('y', height / 2 + 6) // Çubuğun ortasında yazı konumlandırma
       .attr('text-anchor', 'middle')
       .attr('fill', '#fff')

@@ -1,7 +1,7 @@
 {
   "page": {
     "welcome": "Hoşgeldiniz",
-    "username": "Kullanıcı Adı",
+    "email": "Email",
     "password": "Şifre",
     "login": "Giriş Yap"
   },
@@ -20,5 +20,14 @@
   "navbar": {
     "viewCharts": "Tablolar",
     "home": "Anasayfa"
+  },
+  "recommendationDetail": {
+    "recommendationDetail": "Öneri Detayı",
+    "size": "Boyut",
+    "duration": "Süre",
+    "add": "Ekle"
+  },
+  "profileInfo": {
+    "organizationInfo": "Kuruluş Bilgileri"
   }
 }
