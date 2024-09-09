@@ -1,4 +1,11 @@
-import { SignInRequestModel, SignInResponseModel } from '@/types';
+import {
+  CountryListResponseModel,
+  IndustryListResponseModel,
+  OrganizationDetailRequestModel,
+  OrganizationDetailResponseModel,
+  SignInRequestModel,
+  SignInResponseModel,
+} from '@/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const personalApi = createApi({
@@ -22,14 +29,17 @@ export const personalApi = createApi({
         body: credentials,
       }),
     }),
-    getIndustryList: builder.query<string, void>({
+    getIndustryList: builder.query<IndustryListResponseModel[], void>({
       query: () => '/industries',
     }),
-    getCountryList: builder.query<string, void>({
+    getCountryList: builder.query<CountryListResponseModel[], void>({
       query: () => '/countries',
     }),
-    getOrganizationDetail: builder.query<string, void>({
-      query: (ORGANIZATION_ID) => `/organization/${ORGANIZATION_ID}/detail`,
+    getOrganizationDetail: builder.query<
+      OrganizationDetailResponseModel,
+      OrganizationDetailRequestModel
+    >({
+      query: ({ organizationId }) => `/organization/${organizationId}/detail`,
     }),
     getImpactRunList: builder.query<Record<string, any>[], void>({
       query: () => '/impact-runs',
@@ -44,7 +54,7 @@ export const {
   useLoginMutation,
   useGetIndustryListQuery,
   useGetCountryListQuery,
-  useGetOrganizationDetailQuery,
+  useLazyGetOrganizationDetailQuery,
   useGetImpactRunListQuery,
   useLazyGetImpactRunDetailQuery,
 } = personalApi;

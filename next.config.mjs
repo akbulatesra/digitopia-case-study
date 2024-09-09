@@ -17,15 +17,12 @@ const nextConfig = {
         destination: SIGNIN_URL,
       },
       {
-        source: '/api/:path*',
-        destination: `${DATA_URL}:8080/:path*`,
-        has: [
-          {
-            type: 'query',
-            key: 'path',
-            value: 'industries|countries',
-          },
-        ],
+        source: '/api/industries',
+        destination: `${DATA_URL}:8080/industries`,
+      },
+      {
+        source: '/api/countries',
+        destination: `${DATA_URL}:8080/countries`,
       },
       {
         source: '/api/organization/:id/detail',

@@ -20,6 +20,40 @@ export interface SignInResponseModel {
     token: string;
   };
 }
+export interface OrganizationDetailRequestModel {
+  organizationId: string;
+}
+export interface OrganizationDetailResponseModel {
+  children: [];
+  countryId: string;
+  createdById: string;
+  createdOn: string;
+  id: string;
+  industryId: string;
+  logoUrl: null;
+  name: string;
+  parentId: string;
+}
+export interface IndustryListResponseModel {
+  code: null;
+  id: string;
+  name: string;
+  parent: {
+    code: null;
+    id: string;
+    name: string;
+    parent: null;
+  };
+}
+export interface CountryListResponseModel {
+  id: string;
+  name: string;
+  parent: {
+    id: string;
+    name: string;
+    parent: null;
+  };
+}
 export type Locale = 'tr' | 'en';
 
 export interface WeekLine {
