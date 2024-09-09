@@ -18,17 +18,21 @@ import {
   ListItemIcon,
   Divider,
   styled,
+  Button,
 } from '@mui/material';
 import { useEffect, useMemo } from 'react';
 import { setCountries } from '@/redux/slices/countrySlice';
 import { setIndustries } from '@/redux/slices/industrySlice';
 import { useTranslations } from 'next-intl';
+import { Logout } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
+import { clearUser } from '@/redux/slices/userSlice';
 
 const StyledIcon = styled(ListItemIcon)({
   minWidth: 40,
 });
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ close }: { close: () => void }) => {
   const { organizationId, name, familyName } = useAppSelector(
     (state) => state.user
   );
@@ -37,6 +41,7 @@ const ProfileInfo = () => {
   const { error, data: IndustryListData } = useGetIndustryListQuery();
   const { data: CountryListData } = useGetCountryListQuery();
   const [trigger, { data }] = useLazyGetOrganizationDetailQuery();
+  const router = useRouter();
 
   const filteredIndustry = useMemo(() => {
     return IndustryListData?.find(
@@ -48,6 +53,14 @@ const ProfileInfo = () => {
     return CountryListData?.find((country) => country.id === data?.countryId);
   }, [IndustryListData, data]);
 
+  const handleLogout = () => {
+    localStorage.setItem('accessToken', '');
+    localStorage.setItem('idToken', '');
+    dispatch(clearUser());
+    close();
+    router.push('/');
+  };
+
   useEffect(() => {
     if (CountryListData) dispatch(setCountries(CountryListData));
     if (IndustryListData) dispatch(setIndustries(IndustryListData));
@@ -56,7 +69,7 @@ const ProfileInfo = () => {
 
   useErrorListener(error);
   return (
-    <Box p={2}>
+    <Box p={2} display="flex" flexDirection="column" height="100%">
       <Avatar
         sx={{ width: 50, height: 50, marginX: 'auto', marginBottom: 1 }}
       />
@@ -96,6 +109,11 @@ const ProfileInfo = () => {
           </ListItem>
         </List>
       </Box>
+      <Button
+        sx={{ marginTop: 'auto', marginLeft: 'auto' }}
+        endIcon={<Logout />}
+        onClick={handleLogout}
+      ></Button>
     </Box>
   );
 };

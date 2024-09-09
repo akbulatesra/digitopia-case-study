@@ -36,7 +36,7 @@ const Navbar = () => {
     >
       {
         <RightSidePanel
-          children={<ProfileInfo />}
+          children={<ProfileInfo close={closeRightPanel} />}
           onClose={closeRightPanel}
           isOpen={open}
         />

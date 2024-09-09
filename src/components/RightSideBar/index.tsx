@@ -29,7 +29,14 @@ const RightSidePanel = ({ children, isOpen, onClose }: RightSidePanelProps) => {
       >
         <ExitToAppIcon sx={{ fill: 'black' }} />
       </IconButton>
-      <Box mt={2} paddingX={2} paddingY={2} maxWidth={450}>
+      <Box
+        mt={2}
+        paddingX={2}
+        paddingY={2}
+        maxWidth={450}
+        display="flex"
+        height="100%"
+      >
         {children}
       </Box>
     </Drawer>
