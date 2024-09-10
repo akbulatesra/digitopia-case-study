@@ -2,6 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import { ReactNode } from 'react';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Box, IconButton } from '@mui/material';
+import useResponsive from '@/hooks/useResponsive';
 
 interface RightSidePanelProps {
   children: ReactNode;
@@ -10,6 +11,8 @@ interface RightSidePanelProps {
 }
 
 const RightSidePanel = ({ children, isOpen, onClose }: RightSidePanelProps) => {
+  const isSmDown = useResponsive('sm', 'down');
+
   const handleClose = () => {
     onClose();
   };
@@ -31,9 +34,9 @@ const RightSidePanel = ({ children, isOpen, onClose }: RightSidePanelProps) => {
       </IconButton>
       <Box
         mt={2}
-        paddingX={2}
-        paddingY={2}
-        maxWidth={450}
+        paddingX={isSmDown ? 1 : 2}
+        paddingY={isSmDown ? 4 : 2}
+        maxWidth={isSmDown ? 320 : 450}
         display="flex"
         height="100%"
       >
