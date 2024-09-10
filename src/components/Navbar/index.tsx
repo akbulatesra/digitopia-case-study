@@ -144,7 +144,7 @@ const Navbar = () => {
           vertical: 'top',
           horizontal: 'center',
         }}
-        sx={{ width: '100%' }} // Genişlik ayarı
+        sx={{ width: '100%' }}
       >
         <Box display="flex" flexDirection="column" gap={1} padding={1}>
           <Link href="/home">{t('home')}</Link>

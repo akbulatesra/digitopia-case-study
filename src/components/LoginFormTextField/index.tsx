@@ -1,5 +1,5 @@
-import { styled, TextField } from '@mui/material';
 import { FieldError, UseFormRegister } from 'react-hook-form';
+import { StyledLoginFormTextField } from '../StyledItems';
 
 interface LoginFormTextFieldProps {
   error: FieldError | undefined;
@@ -9,41 +9,6 @@ interface LoginFormTextFieldProps {
   slotProps?: any;
   registerLabel: string;
 }
-
-const StyledLoginFormTextField = styled(TextField)({
-  '& .MuiInputBase-input': {
-    color: 'inherit',
-  },
-  '& .MuiInputLabel-root': {
-    color: 'inherit',
-  },
-  '& .MuiInputLabel-root.Mui-error': {
-    color: 'inherit',
-  },
-  '& .MuiInputLabel-root.Mui-focused': {
-    color: 'inherit',
-  },
-  '& .MuiInput-underline:before': {
-    borderBottomColor: 'white',
-  },
-  '& .MuiFormHelperText-root': {
-    color: '#f44336',
-    textAlign: 'end',
-    fontWeight: 'bold',
-  },
-  '& .MuiInput-underline.Mui-error:before': {
-    borderBottomColor: '#f44336',
-  },
-  '& .MuiInput-underline.Mui-error:after': {
-    borderBottomColor: '#f44336',
-  },
-  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-    borderBottomColor: '#747578',
-  },
-  '& .MuiInputBase-root:after': {
-    borderBottomColor: '#747578',
-  },
-});
 
 const LoginFormTextField = ({
   error,

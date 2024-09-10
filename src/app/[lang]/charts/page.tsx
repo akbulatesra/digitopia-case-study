@@ -6,10 +6,12 @@ const Charts = () => {
   return (
     <Box
       display="flex"
-      sx={{ background: 'red' }}
-      width="fit-content"
+      sx={{ background: 'black' }}
       margin="auto"
       gap={2}
+      padding={4}
+      borderRadius={8}
+      width="fit-content"
     >
       <RecommendationsList />
       <GanttChart />

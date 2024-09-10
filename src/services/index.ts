@@ -1,6 +1,7 @@
 import {
   CountryListResponseModel,
   ImpactRunDetailResponseModel,
+  ImpactRunListResponseModel,
   IndustryListResponseModel,
   OrganizationDetailRequestModel,
   OrganizationDetailResponseModel,
@@ -42,10 +43,10 @@ export const personalApi = createApi({
     >({
       query: ({ organizationId }) => `/organization/${organizationId}/detail`,
     }),
-    getImpactRunList: builder.query<Record<string, any>[], void>({
+    getImpactRunList: builder.query<ImpactRunListResponseModel[], void>({
       query: () => '/impact-runs',
     }),
-    getImpactRunDetail: builder.query<ImpactRunDetailResponseModel[], void>({
+    getImpactRunDetail: builder.query<ImpactRunDetailResponseModel[], string>({
       query: (IMPACT_RUN_ID) => `/impact-run/${IMPACT_RUN_ID}/recommendations`,
     }),
   }),
@@ -56,6 +57,6 @@ export const {
   useGetIndustryListQuery,
   useGetCountryListQuery,
   useLazyGetOrganizationDetailQuery,
-  useGetImpactRunListQuery,
+  useLazyGetImpactRunListQuery,
   useLazyGetImpactRunDetailQuery,
 } = personalApi;

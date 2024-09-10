@@ -5,11 +5,13 @@ import userReducer from './slices/userSlice';
 import { personalApi } from '../services';
 import industryReducer from './slices/industrySlice';
 import countryReducer from './slices/countrySlice';
+import recommendationsReducer from './slices/recommendationsSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
   industry: industryReducer,
   country: countryReducer,
+  recommendations: recommendationsReducer,
   [personalApi.reducerPath]: personalApi.reducer,
 });
 

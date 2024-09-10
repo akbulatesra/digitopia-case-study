@@ -15,9 +15,7 @@ import {
   List,
   ListItemText,
   ListItem,
-  ListItemIcon,
   Divider,
-  styled,
   Button,
 } from '@mui/material';
 import { useEffect, useMemo } from 'react';
@@ -27,10 +25,7 @@ import { useTranslations } from 'next-intl';
 import { Logout } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { clearUser } from '@/redux/slices/userSlice';
-
-const StyledIcon = styled(ListItemIcon)({
-  minWidth: 40,
-});
+import { StyledIcon } from '../StyledItems';
 
 const ProfileInfo = ({ close }: { close: () => void }) => {
   const { organizationId, name, familyName } = useAppSelector(
@@ -113,7 +108,9 @@ const ProfileInfo = ({ close }: { close: () => void }) => {
         sx={{ marginTop: 'auto', marginLeft: 'auto' }}
         endIcon={<Logout />}
         onClick={handleLogout}
-      ></Button>
+      >
+        {t('logout')}
+      </Button>
     </Box>
   );
 };

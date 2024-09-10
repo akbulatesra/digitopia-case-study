@@ -28,6 +28,17 @@
     "add": "Add"
   },
   "profileInfo": {
-    "organizationInfo": "Organization Info"
+    "organizationInfo": "Organization Info",
+    "logout": "Logout"
+  },
+  "datePicker": {
+    "start": "Start Date",
+    "end": "End Date",
+    "submit": "Submit"
+  },
+  "required": {
+    "emailType": "Please enter a valid email ",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required"
   }
 }

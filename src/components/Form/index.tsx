@@ -5,7 +5,11 @@ import { object, string } from 'yup';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, IconButton, InputAdornment } from '@mui/material';
-import { useLoginMutation } from '@/services';
+import {
+  useLazyGetImpactRunDetailQuery,
+  useLazyGetImpactRunListQuery,
+  useLoginMutation,
+} from '@/services';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LoginFormTextField from '../LoginFormTextField';
@@ -15,11 +19,7 @@ import { useAppDispatch } from '@/redux/hook';
 import { setUser } from '@/redux/slices/userSlice';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-
-const loginFormSchema = object({
-  email: string().email('email gir').required('Email is required'), //DÜZELT
-  password: string().required('Password is required'),
-});
+import { setRecommendationsData } from '@/redux/slices/recommendationsSlice';
 
 type Inputs = {
   email: string;
@@ -32,6 +32,11 @@ const Form = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const t = useTranslations('page');
+
+  const loginFormSchema = object({
+    email: string().email(t('emailType')).required(t('emailRequired')),
+    password: string().required(t('passwordRequired')),
+  });
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -53,6 +58,8 @@ const Form = () => {
     resolver: yupResolver(loginFormSchema),
   });
   const [login, { isLoading, error }] = useLoginMutation();
+  const [fetchImpactRunList] = useLazyGetImpactRunListQuery();
+  const [trigger] = useLazyGetImpactRunDetailQuery();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const response = await login({
@@ -75,6 +82,13 @@ const Form = () => {
         name: response.idToken.payload.name,
       })
     );
+    if (fetchImpactRunList) {
+      const data = await fetchImpactRunList().unwrap();
+      if (data?.[0]?.id) {
+        const recommendationList = await trigger(data[0].id).unwrap();
+        dispatch(setRecommendationsData(recommendationList));
+      }
+    }
     router.push('/home');
   };
 
