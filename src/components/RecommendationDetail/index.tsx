@@ -1,34 +1,15 @@
 import React, { FC, useMemo } from 'react';
-import { Box, Button, Chip, Divider, styled, Typography } from '@mui/material';
+import { Box, Button, Chip, Divider, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { ImpactRunDetailResponseModel } from '@/types';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { AddCircle } from '@mui/icons-material';
+import { StyledCenterBox, StyledH3, StyledInfoBox } from '../StyledItems';
 
 interface RecommendationProps {
   selectedRecommendation: ImpactRunDetailResponseModel | null;
 }
-
-const StyledInfoBox = styled(Box)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  width: 'fit-content',
-  justifyContent: 'space-between',
-}));
-
-const StyledCenterBox = styled(Box)(() => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexWrap: 'wrap',
-}));
-
-const StyledH3 = styled(Typography)(() => ({
-  variant: 'body1',
-  fontWeight: 'bold',
-}));
 
 const RecommendationDetail: FC<RecommendationProps> = ({
   selectedRecommendation,

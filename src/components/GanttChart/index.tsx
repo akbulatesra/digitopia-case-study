@@ -2,14 +2,17 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { createWeekLine } from '@/helpers/createWeekLine';
+import { createBars } from '@/helpers/createBars';
 
 interface DataPoint {
   month: string;
 }
+
 interface DataPoint2 {
   label: string;
   startMonth: string;
   endMonth: string;
+  week: number;
 }
 
 const GanttChart: React.FC = () => {
@@ -18,7 +21,6 @@ const GanttChart: React.FC = () => {
   useEffect(() => {
     if (svgRef.current === null) return;
 
-    // SVG boyutları
     const margin = { top: 40, right: 0, bottom: 0, left: 0 };
     const width = 960 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
@@ -27,13 +29,13 @@ const GanttChart: React.FC = () => {
     const currentMonth = today.toLocaleString('default', {
       month: 'short',
     });
+
     const dataNew: DataPoint2[] = [
-      { label: 'Project A', startMonth: 'Jan', endMonth: 'Apr' },
-      { label: 'Project B', startMonth: 'May', endMonth: 'Jul' },
-      // Diğer veri noktaları...
+      { label: 'Project C', startMonth: 'Apr', endMonth: 'Aug', week: 4 },
+      { label: 'Project A', startMonth: 'Jan', endMonth: 'Apr', week: 1 },
+      { label: 'Project B', startMonth: 'May', endMonth: 'Jul', week: 3 },
     ];
 
-    // Veriyi oluştur
     const data: DataPoint[] = [
       { month: 'Jan' },
       { month: 'Feb' },
@@ -55,16 +57,14 @@ const GanttChart: React.FC = () => {
     const sortedMonths = months
       .slice(startIndex)
       .concat(months.slice(0, startIndex));
-    const filteredMonths = sortedMonths.slice(0, -1); // Son ay hariç ayları alıyoruz
+    const filteredMonths = sortedMonths.slice(0, -1);
 
-    // D3 ölçeklerini oluştur
     const xMonth = d3
       .scaleBand<string>()
       .domain(sortedMonths)
       .range([0, width])
       .padding(0);
 
-    // SVG elemanını oluştur
     const svg = d3
       .select(svgRef.current)
       .attr('width', width + margin.left + margin.right)
@@ -72,40 +72,35 @@ const GanttChart: React.FC = () => {
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Arka planı ekle
     svg
       .append('rect')
       .attr('width', width)
       .attr('height', height)
-      .attr('fill', '#C0C0C0') // Arka plan rengi
+      .attr('fill', '#ffffff')
       .attr('x', 0)
       .attr('y', 0);
 
-    // X ekseninin arka planını ekle
     const xAxisGroup = svg
       .append('g')
       .attr('class', 'x axis')
       .attr('transform', `translate(0, 0)`);
 
-    // X ekseninin arka planı için bir rect ekle
     xAxisGroup
       .append('rect')
       .attr('x', 0)
-      .attr('y', -40) // Y ekseninin üstünde
+      .attr('y', -40)
       .attr('width', width)
-      .attr('height', 40) // X ekseninin yüksekliği
-      .attr('fill', '#000A11'); // X ekseninin arka plan rengi
+      .attr('height', 40)
+      .attr('fill', '#afafaf');
 
-    // X eksenini oluştur
     xAxisGroup
       .call(d3.axisTop(xMonth))
       .selectAll('.tick text')
-      .style('font-size', 16);
+      .style('font-size', 16)
+      .style('color', 'black');
 
-    // X ekseninin rengini değiştir
-    xAxisGroup.selectAll('path, line').style('display', 'none'); // X ekseninin rengi
+    xAxisGroup.selectAll('path, line').style('display', 'none');
 
-    // Çeyrek sınırları yerine ayların kenarlarını gösteren boş çizgiler
     svg
       .selectAll('.month-line')
       .data(filteredMonths)
@@ -114,9 +109,9 @@ const GanttChart: React.FC = () => {
       .attr('class', 'month-line')
       .attr('y1', 0)
       .attr('y2', height)
-      .attr('x1', (d) => xMonth(d)! + xMonth.bandwidth()) // Ayların ortasına hizalama
-      .attr('x2', (d) => xMonth(d)! + xMonth.bandwidth()) // Ayların ortasına hizalama
-      .attr('stroke', '#9f3333') // Çizgi rengi
+      .attr('x1', (d) => xMonth(d)! + xMonth.bandwidth())
+      .attr('x2', (d) => xMonth(d)! + xMonth.bandwidth())
+      .attr('stroke', '#282828')
       .attr('stroke-width', 2)
       .attr('stroke-dasharray', '2,2');
 
@@ -144,38 +139,17 @@ const GanttChart: React.FC = () => {
       x1: (d: string) => xMonth(d)! + (xMonth.bandwidth() * 3) / 4,
       x2: (d: string) => xMonth(d)! + (xMonth.bandwidth() * 3) / 4,
     };
+
     createWeekLine(line1);
     createWeekLine(line2);
     createWeekLine(line3);
 
-    svg
-      .selectAll('.bar')
-      .data(dataNew)
-      .enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('x', (d) => xMonth(d.startMonth) ?? 0)
-      .attr('y', 0)
-      .attr('width', (d) => {
-        const start = xMonth(d.startMonth);
-        const end = xMonth(d.endMonth);
-        return end ? end - (start ?? 0) : 0;
-      })
-      .attr('height', 40) // Çubuğun yüksekliği
-      .attr('fill', '#007bff')
-      .attr('transform', `translate(0, ${height / 2 - 20})`);
-    svg
-      .selectAll('.bar-text')
-      .data(dataNew)
-      .enter()
-      .append('text')
-      .attr('class', 'bar-text')
-      .attr('x', (d) => (xMonth(d.startMonth) as number) + 50 ?? 0)
-      .attr('y', height / 2 + 6) // Çubuğun ortasında yazı konumlandırma
-      .attr('text-anchor', 'middle')
-      .attr('fill', '#fff')
-      .style('font-size', '14px')
-      .text((d) => d.label);
+    createBars({
+      svg,
+      data: dataNew,
+      xMonth,
+      height,
+    });
   }, []);
 
   return <svg ref={svgRef}></svg>;
