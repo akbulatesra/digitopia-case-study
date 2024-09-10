@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { createWeekLine } from '@/helpers/createWeekLine';
 import { createBars } from '@/helpers/createBars';
+import { useAppSelector } from '@/redux/hook';
 
 interface DataPoint {
   month: string;
@@ -13,10 +14,12 @@ interface DataPoint2 {
   startMonth: string;
   endMonth: string;
   week: number;
+  background: string;
 }
 
 const GanttChart: React.FC = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const { data } = useAppSelector((state) => state.recommendations);
 
   useEffect(() => {
     if (svgRef.current === null) return;
@@ -29,14 +32,17 @@ const GanttChart: React.FC = () => {
     const currentMonth = today.toLocaleString('default', {
       month: 'short',
     });
+    const dataNew: DataPoint2[] = data
+      .filter((item) => item.topicRecommendation.endMonth)
+      .map((item) => ({
+        label: item.topicRecommendation.recommendation || '',
+        startMonth: item.topicRecommendation.startMonth || '',
+        endMonth: item.topicRecommendation.endMonth || '',
+        week: item.topicRecommendation.startWeek || 0,
+        background: item.topicRecommendation.backgroundColor || 'blue',
+      }));
 
-    const dataNew: DataPoint2[] = [
-      { label: 'Project C', startMonth: 'Apr', endMonth: 'Aug', week: 4 },
-      { label: 'Project A', startMonth: 'Jan', endMonth: 'Apr', week: 1 },
-      { label: 'Project B', startMonth: 'May', endMonth: 'Jul', week: 3 },
-    ];
-
-    const data: DataPoint[] = [
+    const MonthData: DataPoint[] = [
       { month: 'Jan' },
       { month: 'Feb' },
       { month: 'Mar' },
@@ -51,7 +57,7 @@ const GanttChart: React.FC = () => {
       { month: 'Dec' },
     ];
 
-    const months = data.map((d) => d.month);
+    const months = MonthData.map((d) => d.month);
     const startIndex = months.indexOf(currentMonth);
 
     const sortedMonths = months
@@ -150,7 +156,7 @@ const GanttChart: React.FC = () => {
       xMonth,
       height,
     });
-  }, []);
+  }, [data]);
 
   return <svg ref={svgRef}></svg>;
 };

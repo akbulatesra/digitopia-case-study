@@ -108,7 +108,9 @@ const ProfileInfo = ({ close }: { close: () => void }) => {
         sx={{ marginTop: 'auto', marginLeft: 'auto' }}
         endIcon={<Logout />}
         onClick={handleLogout}
-      ></Button>
+      >
+        {t('logout')}
+      </Button>
     </Box>
   );
 };

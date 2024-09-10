@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 interface StyledListItemButtonProps {
-  bgColor?: string; // Arka plan rengi için opsiyonel prop
+  bgColor?: string;
 }
 
 export const StyledInfoBox = styled(Box)(() => ({
@@ -34,15 +34,15 @@ export const StyledH3 = styled(Typography)(() => ({
   fontWeight: 'bold',
 }));
 
+export const isDarkBackground = (bgColor: string) => {
+  const [r, g, b] = bgColor.match(/\d+/g)?.map(Number) || [0, 0, 0];
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return luminance < 128;
+};
+
 export const StyledListItemButton = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'bgColor',
 })<StyledListItemButtonProps>(({ bgColor, theme }) => {
-  const isDarkBackground = (bgColor: string) => {
-    const [r, g, b] = bgColor.match(/\d+/g)?.map(Number) || [0, 0, 0];
-    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-    return luminance < 128;
-  };
-
   const textColor = bgColor && isDarkBackground(bgColor) ? 'white' : 'black';
 
   return {
@@ -85,6 +85,10 @@ const openedMixin = (theme: Theme): CSSObject => ({
   height: drawerHeight,
   position: 'absolute',
   fontSize: 14,
+  [theme.breakpoints.down('sm')]: {
+    right: 'auto',
+    left: 0,
+  },
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -103,6 +107,10 @@ const closedMixin = (theme: Theme): CSSObject => ({
   left: 'auto',
   height: drawerHeight,
   position: 'absolute',
+  [theme.breakpoints.down('sm')]: {
+    right: 'auto',
+    left: 0,
+  },
 });
 
 export const StyledBox = styled(Box)(({ theme }) => ({

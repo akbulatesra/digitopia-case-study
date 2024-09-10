@@ -28,7 +28,6 @@ const RightSidePanel = ({ children, isOpen, onClose }: RightSidePanelProps) => {
         sx={{ position: 'absolute', right: 0 }}
         size="large"
         onClick={handleClose}
-        aria-label="button for close right panel" //DÜZELT
       >
         <ExitToAppIcon sx={{ fill: 'black' }} />
       </IconButton>

@@ -1,9 +1,5 @@
 'use client';
-import {
-  useGetImpactRunListQuery,
-  useLazyGetImpactRunDetailQuery,
-} from '@/services';
-import { useEffect, useState, useMemo } from 'react';
+import { useState } from 'react';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -21,22 +17,18 @@ import {
   StyledDrawer,
   StyledListItemButton,
 } from '../StyledItems';
+import { useAppSelector } from '@/redux/hook';
 
 const RecommendationsList = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
+  const [selectedBg, setSelectedBg] = useState('');
+  const { data } = useAppSelector((state) => state.recommendations);
   const [selectedRecommendation, setSelectedRecommedation] =
     useState<ImpactRunDetailResponseModel | null>(null);
-  const { data: ImpactRunListData } = useGetImpactRunListQuery();
-  const [trigger, { data: RecommendationsData }] =
-    useLazyGetImpactRunDetailQuery(ImpactRunListData?.[0]?.id);
-
-  const ExpandedRecommendationsData = useMemo(() => {
-    return RecommendationsData ? [...RecommendationsData] : [];
-  }, [RecommendationsData]);
 
   const bgColor = useGenerateColorFromLength({
-    length: ExpandedRecommendationsData?.length,
+    length: data?.length,
     minColor: 0x66ccff,
     maxColor: 0x003366,
   });
@@ -46,35 +38,31 @@ const RecommendationsList = () => {
   };
 
   const handleRightPanel = (
-    recommendation: ImpactRunDetailResponseModel | null
+    recommendation: ImpactRunDetailResponseModel | null,
+    index: number
   ) => {
     setIsRightPanelOpen(true);
     setSelectedRecommedation(recommendation);
+    setSelectedBg(bgColor[index]);
   };
 
   const closeRightPanel = () => {
     setIsRightPanelOpen(false);
   };
 
-  useEffect(() => {
-    if (ImpactRunListData?.[0]?.id) {
-      trigger(ImpactRunListData[0].id);
-    }
-  }, [ImpactRunListData, trigger]);
-
   return (
     <StyledBox>
-      {selectedRecommendation && (
-        <RightSidePanel
-          children={
-            <RecommendationDetail
-              selectedRecommendation={selectedRecommendation}
-            />
-          }
-          isOpen={isRightPanelOpen}
-          onClose={closeRightPanel}
-        />
-      )}
+      <RightSidePanel
+        children={
+          <RecommendationDetail
+            selectedRecommendation={selectedRecommendation}
+            closeRightPanel={closeRightPanel}
+            backgroundColor={selectedBg}
+          />
+        }
+        isOpen={isRightPanelOpen}
+        onClose={closeRightPanel}
+      />
       <StyledDrawer variant="permanent" open={isDrawerOpen} anchor="left">
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -83,7 +71,7 @@ const RecommendationsList = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {ExpandedRecommendationsData?.map((recommendation, index) => (
+          {data?.map((recommendation, index) => (
             <ListItem
               key={index}
               disablePadding
@@ -92,11 +80,12 @@ const RecommendationsList = () => {
               <StyledListItemButton
                 key={index}
                 bgColor={bgColor[index]}
-                onClick={() => handleRightPanel(recommendation)}
+                onClick={() => handleRightPanel(recommendation, index)}
+                disabled={!isDrawerOpen}
               >
                 <ListItemText
                   disableTypography
-                  primary={recommendation.topicRecommendation.recommendation}
+                  primary={recommendation.topicRecommendation?.recommendation}
                   sx={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',

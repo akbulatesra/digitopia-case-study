@@ -1,3 +1,4 @@
+import { isDarkBackground } from '@/components/StyledItems';
 import * as d3 from 'd3';
 
 interface DataPoint2 {
@@ -5,6 +6,7 @@ interface DataPoint2 {
   startMonth: string;
   endMonth: string;
   week: number;
+  background: string;
 }
 
 interface CreateBarsProps {
@@ -42,10 +44,10 @@ export const createBars = ({ svg, data, xMonth, height }: CreateBarsProps) => {
     .attr('width', (d) => {
       const start = xMonth(d.startMonth);
       const end = xMonth(d.endMonth);
-      return end ? end - (start ?? 0) : 0;
+      return end ? end - (start ?? 0) : 80;
     })
     .attr('height', barHeight)
-    .attr('fill', '#007bff');
+    .attr('fill', (d) => d.background);
 
   svg
     .selectAll<SVGTextElement, DataPoint2>('.bar-text')
@@ -54,15 +56,16 @@ export const createBars = ({ svg, data, xMonth, height }: CreateBarsProps) => {
     .attr('class', 'bar-text')
     .attr('x', (d) => {
       const startMonth = xMonth(d.startMonth);
-      const weekOffset = (d.week - 1) * (xMonth.bandwidth() / 4);
-      return startMonth ? startMonth + weekOffset + xMonth.bandwidth() / 2 : 0;
+      const endMonth = xMonth(d.endMonth);
+      const barWidth = endMonth ? endMonth - (startMonth ?? 0) : 80;
+      return barWidth / 2;
     })
     .attr('y', (d) => {
       const barY = yScale(d.label) ?? 0;
       return barY + barHeight / 2;
     })
     .attr('text-anchor', 'middle')
-    .attr('fill', '#000')
-    .style('font-size', '14px')
+    .attr('fill', (d) => (isDarkBackground(d.background) ? 'white' : 'black'))
+    .style('font-size', '10px')
     .text((d) => d.label);
 };

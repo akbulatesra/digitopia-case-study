@@ -28,6 +28,17 @@
     "add": "Ekle"
   },
   "profileInfo": {
-    "organizationInfo": "Kuruluş Bilgileri"
+    "organizationInfo": "Kuruluş Bilgileri",
+    "logout": "Çıkış Yap"
+  },
+  "datePicker": {
+    "start": "Başlangıç Tarihi",
+    "end": "Bitiş Tarihi",
+    "submit": "Kaydet"
+  },
+  "required": {
+    "emailType": "Lütfen geçerli bir email adresi giriniz",
+    "emailRequired": "Email alanı zorunludur",
+    "passwordRequired": "Şifre alanı zorunludur"
   }
 }

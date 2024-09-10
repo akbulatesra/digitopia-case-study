@@ -55,22 +55,29 @@ export interface CountryListResponseModel {
   };
 }
 interface TopicRecommendation {
-  capex: boolean;
-  condition: string | null;
-  description: string;
-  dimension: string;
-  dimensionId: string | null;
-  displayOrder: number;
+  capex?: boolean;
+  condition?: string | null;
+  description?: string;
+  dimension?: string;
+  dimensionId?: string | null;
+  displayOrder?: number;
+  id?: string;
+  importance?: number | null;
+  initiativeSize?: string;
+  opex?: boolean;
+  product?: string;
+  recommendation?: string;
+  recommendationType?: string;
+  section?: string;
+  topic?: string;
+  urgency?: number | null;
+  startMonth?: string;
+  endMonth?: string;
+  startWeek?: number;
+  backgroundColor?: string;
+}
+export interface ImpactRunListResponseModel {
   id: string;
-  importance: number | null;
-  initiativeSize: string;
-  opex: boolean;
-  product: string;
-  recommendation: string;
-  recommendationType: string;
-  section: string;
-  topic: string;
-  urgency: number | null;
 }
 export interface ImpactRunDetailResponseModel {
   deleted: boolean;
@@ -86,6 +93,7 @@ export interface ImpactRunDetailResponseModel {
   topicScore: number;
   urgency: number;
 }
+
 export type Locale = 'tr' | 'en';
 
 export interface WeekLine {
