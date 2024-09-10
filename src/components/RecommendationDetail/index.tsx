@@ -22,11 +22,11 @@ const StyledCenterBox = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  flexWrap: 'wrap',
 }));
 
 const StyledH3 = styled(Typography)(() => ({
-  variant: 'h3',
-  fontSize: 18,
+  variant: 'body1',
   fontWeight: 'bold',
 }));
 
@@ -51,8 +51,7 @@ const RecommendationDetail: FC<RecommendationProps> = ({
       <Box marginX={2}>
         <Typography
           textAlign="center"
-          variant="h1"
-          fontSize={30}
+          variant="subtitle1"
           fontWeight="bold"
           marginBottom={0.5}
         >
@@ -66,17 +65,12 @@ const RecommendationDetail: FC<RecommendationProps> = ({
             <Chip label={section} />
           </StyledCenterBox>
 
-          <Typography
-            textAlign="center"
-            variant="h2"
-            fontSize={28}
-            fontWeight="bold"
-          >
+          <Typography textAlign="center" variant="subtitle2" fontWeight="bold">
             {recommendation}
           </Typography>
           <Box display="flex" justifyContent="space-evenly">
             <StyledInfoBox>
-              <StyledH3>CAPEX</StyledH3>
+              <StyledH3>APEX</StyledH3>
               {capex ? <MonetizationOnIcon /> : <HighlightOffIcon />}
             </StyledInfoBox>
             <StyledInfoBox>
