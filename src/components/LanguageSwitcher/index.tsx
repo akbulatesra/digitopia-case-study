@@ -33,7 +33,6 @@ const LanguageSwitcher = ({ sx }: LanguageSwitcherProps) => {
     <Select
       id="select"
       labelId="select-label"
-      label="Age"
       onChange={handleChange}
       disabled={isPending}
       defaultValue={locale}
@@ -43,6 +42,9 @@ const LanguageSwitcher = ({ sx }: LanguageSwitcherProps) => {
         backgroundColor: 'rgba(225, 237, 251, 0.3)',
         borderRadius: 4,
         color: 'inherit',
+        '&  .MuiOutlinedInput-notchedOutline ': {
+          borderColor: '#747578 !important',
+        },
       }}
     >
       <MenuItem value="en">{t('english')}</MenuItem>
