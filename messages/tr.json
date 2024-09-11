@@ -3,7 +3,10 @@
     "welcome": "Hoşgeldiniz",
     "email": "Email",
     "password": "Şifre",
-    "login": "Giriş Yap"
+    "login": "Giriş Yap",
+    "emailType": "Lütfen geçerli bir email adresi giriniz",
+    "emailRequired": "Email alanı zorunludur",
+    "passwordRequired": "Şifre alanı zorunludur"
   },
   "not-found": {
     "notFound": "Sayfa Bulunamadı",
@@ -50,10 +53,5 @@
     "start": "Başlangıç Tarihi",
     "end": "Bitiş Tarihi",
     "submit": "Kaydet"
-  },
-  "required": {
-    "emailType": "Lütfen geçerli bir email adresi giriniz",
-    "emailRequired": "Email alanı zorunludur",
-    "passwordRequired": "Şifre alanı zorunludur"
   }
 }

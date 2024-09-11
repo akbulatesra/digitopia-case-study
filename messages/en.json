@@ -3,7 +3,10 @@
     "welcome": "Welcome",
     "email": "Email",
     "password": "Password",
-    "login": "Sign In"
+    "login": "Sign In",
+    "emailType": "Please enter a valid email ",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required"
   },
   "not-found": {
     "notFound": "Page Not Found",
@@ -50,10 +53,5 @@
     "start": "Start Date",
     "end": "End Date",
     "submit": "Submit"
-  },
-  "required": {
-    "emailType": "Please enter a valid email ",
-    "emailRequired": "Email is required",
-    "passwordRequired": "Password is required"
   }
 }
