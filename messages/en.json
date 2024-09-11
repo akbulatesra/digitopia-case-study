@@ -1,0 +1,57 @@
+{
+  "page": {
+    "welcome": "Welcome",
+    "email": "Email",
+    "password": "Password",
+    "login": "Sign In",
+    "emailType": "Please enter a valid email ",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required"
+  },
+  "not-found": {
+    "notFound": "Page Not Found",
+    "returnHome": "Return Home"
+  },
+  "languages": {
+    "english": "English",
+    "turkish": "Turkish"
+  },
+  "home": {
+    "hello": "Hello {name}!",
+    "viewCharts": "View Charts"
+  },
+  "navbar": {
+    "viewCharts": "Charts",
+    "home": "Home"
+  },
+  "recommendationDetail": {
+    "recommendationDetail": "Recommendation Detail",
+    "size": "Size",
+    "duration": "Duration",
+    "add": "Add",
+    "Jan": "Jan",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Aug",
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dec"
+  },
+  "recommendations": {
+    "add": "Add"
+  },
+  "profileInfo": {
+    "organizationInfo": "Organization Info",
+    "logout": "Logout"
+  },
+  "datePicker": {
+    "start": "Start Date",
+    "end": "End Date",
+    "submit": "Submit"
+  }
+}
