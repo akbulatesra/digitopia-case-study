@@ -62,6 +62,8 @@ const RecommendationDetail: FC<RecommendationProps> = ({
       initiativeSize,
       description,
       section,
+      startMonth,
+      endMonth,
     } = selectedRecommendation.topicRecommendation;
     return (
       <Box marginX={2}>
@@ -132,14 +134,18 @@ const RecommendationDetail: FC<RecommendationProps> = ({
             </StyledInfoBox>
             <StyledInfoBox>
               <StyledH3>{t('duration')}</StyledH3>
-              <Button
-                variant="contained"
-                startIcon={<AddCircle />}
-                size="small"
-                onClick={handleButtonClick}
-              >
-                {t('add')}
-              </Button>
+              {startMonth || endMonth ? (
+                <Typography>{`${t(startMonth)}-${t(endMonth)}`}</Typography>
+              ) : (
+                <Button
+                  variant="contained"
+                  startIcon={<AddCircle />}
+                  size="small"
+                  onClick={handleButtonClick}
+                >
+                  {t('add')}
+                </Button>
+              )}
             </StyledInfoBox>
           </Box>
         </Box>
