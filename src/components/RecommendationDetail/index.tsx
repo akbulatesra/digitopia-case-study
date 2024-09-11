@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { Box, Button, Chip, Divider, Modal, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -33,9 +33,9 @@ const RecommendationDetail: FC<RecommendationProps> = ({
   const handleButtonClick = () => {
     setOpen(true);
   };
-  const handleDateChange = () => {
-    const monthWeekInfo = useGetDateInfo(selectedStartDate, selectedEndDate);
+  const monthWeekInfo = useGetDateInfo(selectedStartDate, selectedEndDate);
 
+  const handleDateChange = useCallback(() => {
     const updatedRec = {
       ...selectedRecommendation,
       topicRecommendation: {
@@ -49,7 +49,13 @@ const RecommendationDetail: FC<RecommendationProps> = ({
     );
     setOpen(false);
     closeRightPanel();
-  };
+  }, [
+    selectedRecommendation,
+    monthWeekInfo,
+    backgroundColor,
+    dispatch,
+    closeRightPanel,
+  ]);
 
   const recommendationNode = useMemo(() => {
     if (selectedRecommendation === null) return null;
@@ -159,7 +165,15 @@ const RecommendationDetail: FC<RecommendationProps> = ({
         </Box>
       </Box>
     );
-  }, [selectedRecommendation, open, selectedEndDate, selectedStartDate]);
+  }, [
+    selectedRecommendation,
+    open,
+    selectedStartDate,
+    selectedEndDate,
+    maxDate,
+    handleDateChange,
+    t,
+  ]);
 
   return recommendationNode;
 };

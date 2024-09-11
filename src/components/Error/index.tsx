@@ -1,43 +1,47 @@
 'use client';
-import React, { createContext, useContext } from 'react';
-import { Snackbar, Alert } from '@mui/material';
-import useErrorListener from '@/hooks/useErrorListener';
+import React from 'react';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
-type ErrorHandlingContextType = {
-  error: unknown;
-  setError: (error: unknown) => void;
-};
+interface ErrorAlertProps {
+  open: boolean;
+  message: string;
+  onClose: () => void;
+}
 
-const ErrorHandlingContext = createContext<
-  ErrorHandlingContextType | undefined
->(undefined);
-
-const ErrorHandlingProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [error, setError] = React.useState<unknown>(null);
-  const { message, open, handleClose } = useErrorListener(error);
-
+const ErrorAlert: React.FC<ErrorAlertProps> = ({ open, message, onClose }) => {
   return (
-    <ErrorHandlingContext.Provider value={{ error, setError }}>
-      {children}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" variant="filled">
-          {message}
-        </Alert>
-      </Snackbar>
-    </ErrorHandlingContext.Provider>
+    <Snackbar
+      open={open}
+      autoHideDuration={6000}
+      sx={{
+        top: '0px !important',
+        left: '0 !important',
+        right: '0 !important',
+        bottom: '0 !important',
+        zIndex: 999999,
+      }}
+      onClose={(_, reason) => {
+        if (reason !== 'clickaway') {
+          onClose();
+        }
+      }}
+    >
+      <Alert
+        onClose={onClose}
+        severity="error"
+        variant="filled"
+        sx={{
+          minWidth: 200,
+          wordBreak: 'break-word',
+          background: '#92041c',
+          margin: 'auto',
+        }}
+      >
+        {message}
+      </Alert>
+    </Snackbar>
   );
 };
 
-const useErrorHandling = () => {
-  const context = useContext(ErrorHandlingContext);
-  if (context === undefined) {
-    throw new Error(
-      'useErrorHandling must be used within a ErrorHandlingProvider'
-    );
-  }
-  return context;
-};
-
-export { ErrorHandlingProvider, useErrorHandling };
+export default ErrorAlert;
