@@ -4,11 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import useResponsive from '@/hooks/useResponsive';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 const errorImage =
   'https://esrasbucket.s3.eu-north-1.amazonaws.com/ghost+(1).png';
 
-const NotFound = () => {
+const NotFound = ({ params: { locale } }: { params: { locale: string } }) => {
+  unstable_setRequestLocale(locale);
+
   const t = useTranslations('not-found');
   const isSmDown = useResponsive('sm', 'down');
 
