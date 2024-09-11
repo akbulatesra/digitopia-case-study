@@ -6,16 +6,8 @@ import { useEffect } from 'react';
 import { useAppSelector } from '@/redux/hook';
 import { useRouter } from 'next/navigation';
 import useResponsive from '@/hooks/useResponsive';
-import { unstable_setRequestLocale } from 'next-intl/server';
-export const dynamic = 'force-dynamic';
 
-export default function Page({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
-  unstable_setRequestLocale(locale);
-
+export default function Page() {
   const { idToken } = useAppSelector((state) => state.user);
   const router = useRouter();
   const t = useTranslations('page');
