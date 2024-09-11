@@ -8,6 +8,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 
 const errorImage =
   'https://esrasbucket.s3.eu-north-1.amazonaws.com/ghost+(1).png';
+export const dynamic = 'force-dynamic';
 
 const NotFound = ({ params: { locale } }: { params: { locale: string } }) => {
   unstable_setRequestLocale(locale);
