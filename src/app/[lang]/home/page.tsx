@@ -3,8 +3,11 @@ import { Box, Button, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useAppSelector } from '@/redux/hook';
 import useResponsive from '@/hooks/useResponsive';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
-const Home = () => {
+const Home = ({ params: { locale } }: { params: { locale: string } }) => {
+  unstable_setRequestLocale(locale);
+
   const t = useTranslations('home');
   const { name } = useAppSelector((state) => state.user);
   const isSmDown = useResponsive('sm', 'down');

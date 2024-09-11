@@ -1,8 +1,11 @@
 import GanttChart from '@/components/GanttChart';
 import RecommendationsList from '@/components/RecommendationsList';
 import { Box } from '@mui/material';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
-const Charts = () => {
+const Charts = ({ params: { locale } }: { params: { locale: string } }) => {
+  unstable_setRequestLocale(locale);
+
   return (
     <Box
       display="flex"
