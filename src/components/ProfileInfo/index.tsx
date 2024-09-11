@@ -46,7 +46,7 @@ const ProfileInfo = ({ close }: { close: () => void }) => {
 
   const filteredCountry = useMemo(() => {
     return CountryListData?.find((country) => country.id === data?.countryId);
-  }, [IndustryListData, data]);
+  }, [CountryListData, data]);
 
   const handleLogout = () => {
     localStorage.setItem('accessToken', '');

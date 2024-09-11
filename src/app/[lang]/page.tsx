@@ -15,7 +15,7 @@ export default function Page() {
 
   useEffect(() => {
     idToken && router.push('/home');
-  }, []);
+  }, [idToken, router]);
 
   if (idToken) return null;
 

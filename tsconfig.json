@@ -33,7 +33,9 @@
     ".next/types/**/*.ts",
     "types/**/*.d.ts",
     "src/url/index.js",
-    "url.js"
-  ],
+    "url.js",
+    "src/components/Form/Form.test.tsx",
+    "jest.config.ts"
+, "jest.setup.js"  ],
   "exclude": ["node_modules"]
 }

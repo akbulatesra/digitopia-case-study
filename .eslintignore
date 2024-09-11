@@ -1,0 +1,7 @@
+# Test dosyalarını ve klasörlerini kural dışı bırak
+tests/*
+**/__tests__/*
+*.test.js
+*.spec.js
+jest.setup.js
+*.test.tsx
