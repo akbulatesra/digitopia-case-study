@@ -1,10 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import 'dayjs/locale/tr';
 
 type DateRangePickerProps = {
   startDay: dayjs.Dayjs | null;
@@ -24,26 +25,34 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   maxDate,
 }) => {
   const t = useTranslations('datePicker');
+
+  const locale = useLocale();
+  useEffect(() => {
+    dayjs.locale(locale);
+  }, [locale]);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box display="flex" flexDirection="column">
         <Box display="flex" gap={2}>
           <Box>
-            <Typography>{t('start')}</Typography>
+            <Typography color="black">{t('start')}</Typography>
             <DateCalendar
               value={startDay}
               onChange={(date) => onStartDayChange(date)}
               minDate={minDate}
               maxDate={maxDate}
+              sx={{ color: 'black' }}
             />
           </Box>
           <Box>
-            <Typography>{t('end')}</Typography>
+            <Typography color="black">{t('end')}</Typography>
             <DateCalendar
               value={endDay}
               onChange={(date) => onEndDayChange(date)}
-              minDate={minDate}
+              minDate={startDay ? startDay : minDate}
               maxDate={maxDate}
+              sx={{ color: 'black' }}
             />
           </Box>
         </Box>

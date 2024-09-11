@@ -25,6 +25,21 @@
     "recommendationDetail": "Öneri Detayı",
     "size": "Boyut",
     "duration": "Süre",
+    "add": "Ekle",
+    "Jan": "Oca",
+    "Feb": "Şub",
+    "Mar": "Mar",
+    "Apr": "Nis",
+    "May": "May",
+    "Jun": "Haz",
+    "Jul": "Tem",
+    "Aug": "Ağu",
+    "Sep": "Eyl",
+    "Oct": "Eki",
+    "Nov": "Kas",
+    "Dec": "Ara"
+  },
+  "recommendations": {
     "add": "Ekle"
   },
   "profileInfo": {

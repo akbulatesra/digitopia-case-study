@@ -18,12 +18,15 @@ import {
   StyledListItemButton,
 } from '../StyledItems';
 import { useAppSelector } from '@/redux/hook';
+import { Button } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 const RecommendationsList = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isRightPanelOpen, setIsRightPanelOpen] = useState(false);
   const [selectedBg, setSelectedBg] = useState('');
   const { data } = useAppSelector((state) => state.recommendations);
+  const t = useTranslations('recommendations');
   const [selectedRecommendation, setSelectedRecommedation] =
     useState<ImpactRunDetailResponseModel | null>(null);
 
@@ -96,6 +99,7 @@ const RecommendationsList = () => {
             </ListItem>
           ))}
         </List>
+        <Button onClick={() => {}}>{t('add')}</Button>
       </StyledDrawer>
     </StyledBox>
   );

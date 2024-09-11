@@ -25,6 +25,21 @@
     "recommendationDetail": "Recommendation Detail",
     "size": "Size",
     "duration": "Duration",
+    "add": "Add",
+    "Jan": "Jan",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Aug",
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dec"
+  },
+  "recommendations": {
     "add": "Add"
   },
   "profileInfo": {
