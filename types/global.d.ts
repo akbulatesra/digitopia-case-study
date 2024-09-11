@@ -1,4 +1,3 @@
-// types/global.d.ts
 declare module 'util' {
   export class TextEncoder {
     encode(input?: string): Uint8Array;
