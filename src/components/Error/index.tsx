@@ -1,45 +1,43 @@
-import React from 'react';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+'use client';
+import React, { createContext, useContext } from 'react';
+import { Snackbar, Alert } from '@mui/material';
+import useErrorListener from '@/hooks/useErrorListener';
 
-interface ErrorAlertProps {
-  open: boolean;
-  message: string;
-  onClose: () => void;
-}
+type ErrorHandlingContextType = {
+  error: unknown;
+  setError: (error: unknown) => void;
+};
 
-const ErrorAlert: React.FC<ErrorAlertProps> = ({ open, message, onClose }) => {
+const ErrorHandlingContext = createContext<
+  ErrorHandlingContextType | undefined
+>(undefined);
+
+const ErrorHandlingProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [error, setError] = React.useState<unknown>(null);
+  const { message, open, handleClose } = useErrorListener(error);
+
   return (
-    <Snackbar
-      open={open}
-      autoHideDuration={6000}
-      sx={{
-        top: '-100px !important',
-        left: '0 !important',
-        right: '0 !important',
-        bottom: 'auto !important',
-      }}
-      onClose={(_, reason) => {
-        if (reason !== 'clickaway') {
-          onClose();
-        }
-      }}
-    >
-      <Alert
-        onClose={onClose}
-        severity="error"
-        variant="filled"
-        sx={{
-          width: '100%',
-          minWidth: 200,
-          wordBreak: 'break-word',
-          background: '#92041c',
-        }}
-      >
-        {message}
-      </Alert>
-    </Snackbar>
+    <ErrorHandlingContext.Provider value={{ error, setError }}>
+      {children}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" variant="filled">
+          {message}
+        </Alert>
+      </Snackbar>
+    </ErrorHandlingContext.Provider>
   );
 };
 
-export default ErrorAlert;
+const useErrorHandling = () => {
+  const context = useContext(ErrorHandlingContext);
+  if (context === undefined) {
+    throw new Error(
+      'useErrorHandling must be used within a ErrorHandlingProvider'
+    );
+  }
+  return context;
+};
+
+export { ErrorHandlingProvider, useErrorHandling };

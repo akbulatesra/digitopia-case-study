@@ -9,6 +9,7 @@ import Navbar from '@/components/Navbar';
 import BlurContainer from '@/components/BlurContainer';
 import ReduxProviderComponent from '../../components/ReduxProvider';
 import { providerTheme } from '@/theme';
+import { ErrorHandlingProvider } from '@/components/Error';
 
 const bitter = Bitter({ subsets: ['latin'] });
 
@@ -35,21 +36,23 @@ export default async function RootLayout({
       <ReduxProviderComponent>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider theme={providerTheme}>
-            <Box
-              component="body"
-              margin={0}
-              display="flex"
-              height={'100vh'}
-              sx={{
-                backgroundImage:
-                  'url("https://esrasbucket.s3.eu-north-1.amazonaws.com/pexels-francesco-ungaro-2554092.jpg")',
-                backgroundSize: 'cover',
-                WebkitFontSmoothing: 'antialiased',
-              }}
-            >
-              <Navbar />
-              <BlurContainer> {children}</BlurContainer>
-            </Box>
+            <ErrorHandlingProvider>
+              <Box
+                component="body"
+                margin={0}
+                display="flex"
+                height={'100vh'}
+                sx={{
+                  backgroundImage:
+                    'url("https://esrasbucket.s3.eu-north-1.amazonaws.com/pexels-francesco-ungaro-2554092.jpg")',
+                  backgroundSize: 'cover',
+                  WebkitFontSmoothing: 'antialiased',
+                }}
+              >
+                <Navbar />
+                <BlurContainer> {children}</BlurContainer>
+              </Box>
+            </ErrorHandlingProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </ReduxProviderComponent>
