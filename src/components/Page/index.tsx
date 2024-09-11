@@ -7,7 +7,7 @@ import { useAppSelector } from '@/redux/hook';
 import { useRouter } from 'next/navigation';
 import useResponsive from '@/hooks/useResponsive';
 
-export default function Page() {
+export default function PageComponent() {
   const { idToken } = useAppSelector((state) => state.user);
   const router = useRouter();
   const t = useTranslations('page');

@@ -8,7 +8,7 @@ import useResponsive from '@/hooks/useResponsive';
 const errorImage =
   'https://esrasbucket.s3.eu-north-1.amazonaws.com/ghost+(1).png';
 
-const NotFound = () => {
+const NotFoundPage = () => {
   const t = useTranslations('not-found');
   const isSmDown = useResponsive('sm', 'down');
 
@@ -44,4 +44,4 @@ const NotFound = () => {
     </Box>
   );
 };
-export default NotFound;
+export default NotFoundPage;

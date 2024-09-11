@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useAppSelector } from '@/redux/hook';
 import useResponsive from '@/hooks/useResponsive';
 
-const Home = () => {
+const HomeComponent = () => {
   const t = useTranslations('home');
   const { name } = useAppSelector((state) => state.user);
   const isSmDown = useResponsive('sm', 'down');
@@ -39,4 +39,4 @@ const Home = () => {
     </Box>
   );
 };
-export default Home;
+export default HomeComponent;

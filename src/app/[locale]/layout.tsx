@@ -9,6 +9,7 @@ import Navbar from '@/components/Navbar';
 import BlurContainer from '@/components/BlurContainer';
 import ReduxProviderComponent from '../../components/ReduxProvider';
 import { providerTheme } from '@/theme';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 const bitter = Bitter({ subsets: ['latin'] });
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const messages = await getMessages();
+  unstable_setRequestLocale(locale);
 
   return (
     <html lang={locale} className={bitter.className}>
